@@ -20,4 +20,6 @@ public interface RoomInfoMapper {
     List<RoomInfo> selectFree();
 
     int updateStatue(String roomid);
+
+    int updateBackStatue(String roomid);
 }

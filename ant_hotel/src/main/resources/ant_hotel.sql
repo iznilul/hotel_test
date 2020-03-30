@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2020-03-30 14:10:55
+Date: 2020-03-30 15:27:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -80,6 +80,7 @@ CREATE TABLE `check_out` (
 -- Records of check_out
 -- ----------------------------
 INSERT INTO `check_out` VALUES ('2', '老八', '234', '单人', '2020-03-30 13:42:46', '25.00', '2020-03-30 13:42:46');
+INSERT INTO `check_out` VALUES ('3', '老九', '421', '双人', '2020-03-30 15:23:33', '188.88', '2020-03-30 15:23:33');
 
 -- ----------------------------
 -- Table structure for coupons
@@ -226,9 +227,9 @@ CREATE TABLE `room_info` (
 -- ----------------------------
 INSERT INTO `room_info` VALUES ('123', '单人', '0', '23.00', '2.00');
 INSERT INTO `room_info` VALUES ('145', '单人', '0', '24.00', '2.00');
-INSERT INTO `room_info` VALUES ('234', '单人', '0', '25.00', '3.00');
+INSERT INTO `room_info` VALUES ('234', '单人', '1', '25.00', '3.00');
 INSERT INTO `room_info` VALUES ('245', '双人', '0', '30.00', '4.00');
-INSERT INTO `room_info` VALUES ('421', '双人', '0', '188.88', '18.88');
+INSERT INTO `room_info` VALUES ('421', '双人', '1', '188.88', '18.88');
 INSERT INTO `room_info` VALUES ('510', '双人', '0', '198.00', '19.80');
 INSERT INTO `room_info` VALUES ('511', '双人', '1', '198.00', '19.80');
 INSERT INTO `room_info` VALUES ('512', '双人', '1', '198.00', '19.80');
@@ -255,7 +256,7 @@ CREATE TABLE `room_live_record` (
 -- ----------------------------
 INSERT INTO `room_live_record` VALUES ('1', '大便', '2020-03-29 19:41:23', '', '145', '0.00');
 INSERT INTO `room_live_record` VALUES ('2', '老八', '2020-03-30 12:47:33', '2020-03-30 13:42:46', '234', '25.00');
-INSERT INTO `room_live_record` VALUES ('3', '老九', '2020-03-30 12:54:18', '', '421', '0.00');
+INSERT INTO `room_live_record` VALUES ('3', '老九', '2020-03-30 12:54:18', '2020-03-30 15:23:33', '421', '188.88');
 INSERT INTO `room_live_record` VALUES ('4', '老十', '2020-03-30 13:49:44', '', '510', '0.00');
 
 -- ----------------------------
@@ -303,5 +304,4 @@ CREATE TABLE `user_item` (
 -- Records of user_item
 -- ----------------------------
 INSERT INTO `user_item` VALUES ('1', '大便', '145', '1', '1', '0', '1', '1');
-INSERT INTO `user_item` VALUES ('3', '老九', '421', '1', '1', '1', '1', '1');
 INSERT INTO `user_item` VALUES ('4', '老十', '510', '1', '1', '1', '1', '1');

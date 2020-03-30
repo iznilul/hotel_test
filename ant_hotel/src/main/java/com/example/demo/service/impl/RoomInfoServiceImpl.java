@@ -41,4 +41,8 @@ public class RoomInfoServiceImpl implements RoomInfoService {
     public int updateStatue(String roomid) {
         return roomInfoMapper.updateStatue(roomid);
     }
+
+    public int updateBackStatue(String roomid) {
+        return roomInfoMapper.updateBackStatue(roomid);
+    }
 }

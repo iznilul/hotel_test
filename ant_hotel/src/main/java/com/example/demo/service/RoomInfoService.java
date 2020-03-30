@@ -21,4 +21,6 @@ public interface RoomInfoService {
     List<RoomInfo> selectFree();
 //    更新房间状态
     int updateStatue(String roomid);
+
+    int updateBackStatue(String roomid);
 }

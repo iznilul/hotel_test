@@ -47,4 +47,9 @@
     set roomStatus='0'
     where roomId=#{roomid,jdbcType=VARCHAR}
   </update>
+  <update id="updateBackStatue" parameterType="java.lang.String">
+    update room_info
+    set roomStatus='1'
+    where roomId=#{roomid,jdbcType=VARCHAR}
+  </update>
 </mapper>

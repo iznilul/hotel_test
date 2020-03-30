@@ -38,7 +38,7 @@ public class CheckOutController {
         CheckOut checkOut = new CheckOut(userid, name, roomid, roomtype, leavetime, cost, updatetime);
         RoomLiveRecord roomLiveRecord = new RoomLiveRecord(userid, null, null, leavetime, null, cost);
 //        在checkout退房表里插入，在roomliverecord居住记录表里更新，在useritem现有用户表里删除用户
-        return (checkOutService.insert(checkOut) & (roomLiveRecordService.updateLeave(roomLiveRecord)) & (userItemService.deleteByPrimaryKey(userid)));
+        return (checkOutService.insert(checkOut) & (roomLiveRecordService.updateLeave(roomLiveRecord)) & (userItemService.deleteByPrimaryKey(userid))&(roomInfoService.updateBackStatue(roomid)));
     }
 //    增删改减
     @RequestMapping("/update")
