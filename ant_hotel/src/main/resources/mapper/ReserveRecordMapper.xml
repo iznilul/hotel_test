@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ReserveRecordMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.ReserveRecord">
+    <constructor>
+      <idArg column="reserveId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phoneNumber" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomType" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserveTime" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reserve_record
+    where reserveId = #{reserveid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.ReserveRecord">
+    insert into reserve_record (reserveId, `name`, phoneNumber, 
+      roomType, reserveTime)
+    values (#{reserveid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, 
+      #{roomtype,jdbcType=VARCHAR}, #{reservetime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.ReserveRecord">
+    update reserve_record
+    set `name` = #{name,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      roomType = #{roomtype,jdbcType=VARCHAR},
+      reserveTime = #{reservetime,jdbcType=VARCHAR}
+    where reserveId = #{reserveid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select reserveId, `name`, phoneNumber, roomType, reserveTime
+    from reserve_record
+    where reserveId = #{reserveid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select reserveId, `name`, phoneNumber, roomType, reserveTime
+    from reserve_record
+  </select>
+  <select id="selectLast" resultMap="BaseResultMap">
+    select * from reserve_record order by reserveId DESC limit 1
+  </select>
+</mapper>

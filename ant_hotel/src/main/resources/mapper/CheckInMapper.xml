@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.CheckInMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.CheckIn">
+    <constructor>
+      <idArg column="userId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserveId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomNumber" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomType" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="checkInTime" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="updateTime" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from check_in
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.CheckIn">
+    insert into check_in (userId, reserveId, `name`, 
+      roomNumber, roomType, checkInTime, 
+      updateTime)
+    values (#{userid,jdbcType=VARCHAR}, #{reserveid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{roomnumber,jdbcType=VARCHAR}, #{roomtype,jdbcType=VARCHAR}, #{checkintime,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.CheckIn">
+    update check_in
+    set reserveId = #{reserveid,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      roomNumber = #{roomnumber,jdbcType=VARCHAR},
+      roomType = #{roomtype,jdbcType=VARCHAR},
+      checkInTime = #{checkintime,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select userId, reserveId, `name`, roomNumber, roomType, checkInTime, updateTime
+    from check_in
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select userId, reserveId, `name`, roomNumber, roomType, checkInTime, updateTime
+    from check_in
+  </select>
+</mapper>

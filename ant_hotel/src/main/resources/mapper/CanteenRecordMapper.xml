@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.CanteenRecordMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.CanteenRecord">
+    <constructor>
+      <idArg column="userId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="totalPrice" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="coupon" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="cost" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="onTime" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="food" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from canteen_record
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.CanteenRecord">
+    insert into canteen_record (userId, `name`, totalPrice, 
+      coupon, cost, onTime, 
+      food)
+    values (#{userid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{totalprice,jdbcType=INTEGER}, 
+      #{coupon,jdbcType=INTEGER}, #{cost,jdbcType=INTEGER}, #{ontime,jdbcType=VARCHAR}, 
+      #{food,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.CanteenRecord">
+    update canteen_record
+    set `name` = #{name,jdbcType=VARCHAR},
+      totalPrice = #{totalprice,jdbcType=INTEGER},
+      coupon = #{coupon,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=INTEGER},
+      onTime = #{ontime,jdbcType=VARCHAR},
+      food = #{food,jdbcType=LONGVARCHAR}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select userId, `name`, totalPrice, coupon, cost, onTime, food
+    from canteen_record
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select userId, `name`, totalPrice, coupon, cost, onTime, food
+    from canteen_record
+  </select>
+</mapper>

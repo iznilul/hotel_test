@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserFaceInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.UserFaceInfo">
+    <constructor>
+      <idArg column="userId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="groupId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="faceId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="age" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="gender" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="phoneNumber" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="updateTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="Fpath" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="faceFeature" javaType="byte[]" jdbcType="LONGVARBINARY" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_face_info
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.UserFaceInfo">
+    insert into user_face_info (userId, groupId, faceId, 
+      `name`, age, email, gender, 
+      phoneNumber, createTime, updateTime, 
+      Fpath, faceFeature)
+    values (#{userid,jdbcType=VARCHAR}, #{groupid,jdbcType=INTEGER}, #{faceid,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{gender,jdbcType=SMALLINT}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{fpath,jdbcType=VARCHAR}, #{facefeature,jdbcType=LONGVARBINARY})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.UserFaceInfo">
+    update user_face_info
+    set groupId = #{groupid,jdbcType=INTEGER},
+      faceId = #{faceid,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=SMALLINT},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      Fpath = #{fpath,jdbcType=VARCHAR},
+      faceFeature = #{facefeature,jdbcType=LONGVARBINARY}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select userId, groupId, faceId, `name`, age, email, gender, phoneNumber, createTime, 
+    updateTime, Fpath, faceFeature
+    from user_face_info
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select userId, groupId, faceId, `name`, age, email, gender, phoneNumber, createTime, 
+    updateTime, Fpath, faceFeature
+    from user_face_info
+  </select>
+</mapper>

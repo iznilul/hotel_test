@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.RoomInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.RoomInfo">
+    <constructor>
+      <idArg column="roomId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomType" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomStatus" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomPrice" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="hourPrice" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from room_info
+    where roomId = #{roomid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.RoomInfo">
+    insert into room_info (roomId, roomType, roomStatus, 
+      roomPrice, hourPrice)
+    values (#{roomid,jdbcType=VARCHAR}, #{roomtype,jdbcType=VARCHAR}, #{roomstatus,jdbcType=VARCHAR}, 
+      #{roomprice,jdbcType=DECIMAL}, #{hourprice,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.RoomInfo">
+    update room_info
+    set roomType = #{roomtype,jdbcType=VARCHAR},
+      roomStatus = #{roomstatus,jdbcType=VARCHAR},
+      roomPrice = #{roomprice,jdbcType=DECIMAL},
+      hourPrice = #{hourprice,jdbcType=DECIMAL}
+    where roomId = #{roomid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select roomId, roomType, roomStatus, roomPrice, hourPrice
+    from room_info
+    where roomId = #{roomid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select roomId, roomType, roomStatus, roomPrice, hourPrice
+    from room_info
+  </select>
+  <select id="selectFree" resultMap="BaseResultMap">
+    select roomId, roomType, roomStatus, roomPrice, hourPrice
+    from room_info
+    where roomStatus='1'
+  </select>
+  <update id="updateStatue" parameterType="java.lang.String">
+    update room_info
+    set roomStatus='0'
+    where roomId=#{roomid,jdbcType=VARCHAR}
+  </update>
+</mapper>
