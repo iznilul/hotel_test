@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anthotel.admin.dao.RoomLiveRecordMapper">
+  <resultMap id="BaseResultMap" type="com.anthotel.admin.entity.RoomLiveRecord">
+    <constructor>
+      <idArg column="userId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="signTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="leaveTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="roomId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cost" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from room_live_record
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.anthotel.admin.entity.RoomLiveRecord">
+    insert into room_live_record (userId, `name`, signTime, 
+      leaveTime, roomId, cost
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{signtime,jdbcType=TIMESTAMP}, 
+      #{leavetime,jdbcType=TIMESTAMP}, #{roomid,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anthotel.admin.entity.RoomLiveRecord">
+    update room_live_record
+    set `name` = #{name,jdbcType=VARCHAR},
+      signTime = #{signtime,jdbcType=TIMESTAMP},
+      leaveTime = #{leavetime,jdbcType=TIMESTAMP},
+      roomId = #{roomid,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select userId, `name`, signTime, leaveTime, roomId, cost
+    from room_live_record
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select userId, `name`, signTime, leaveTime, roomId, cost
+    from room_live_record
+  </select>
+  <update id="updateLeave" parameterType="com.anthotel.admin.entity.RoomLiveRecord">
+  update room_live_record
+  set leaveTime=#{leavetime},
+    cost=#{cost}
+    where userId=#{userid}
+  </update>
+</mapper>

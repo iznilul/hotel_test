@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anthotel.admin.dao.UserItemMapper">
+  <resultMap id="BaseResultMap" type="com.anthotel.admin.entity.UserItem">
+    <constructor>
+      <idArg column="userId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomCard" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="key" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="coupon1" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="coupon2" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="coupon3" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_item
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.anthotel.admin.entity.UserItem">
+    insert into user_item (userId, `name`, roomId, 
+      roomCard, `key`, coupon1, coupon2, 
+      coupon3)
+    values (#{userid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{roomid,jdbcType=VARCHAR}, 
+      #{roomcard,jdbcType=BIT}, #{key,jdbcType=BIT}, #{coupon1,jdbcType=INTEGER}, #{coupon2,jdbcType=INTEGER}, 
+      #{coupon3,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anthotel.admin.entity.UserItem">
+    update user_item
+    set `name` = #{name,jdbcType=VARCHAR},
+      roomId = #{roomid,jdbcType=VARCHAR},
+      roomCard = #{roomcard,jdbcType=BIT},
+      `key` = #{key,jdbcType=BIT},
+      coupon1 = #{coupon1,jdbcType=INTEGER},
+      coupon2 = #{coupon2,jdbcType=INTEGER},
+      coupon3 = #{coupon3,jdbcType=INTEGER}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select userId, `name`, roomId, roomCard, `key`, coupon1, coupon2, coupon3
+    from user_item
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select userId, `name`, roomId, roomCard, `key`, coupon1, coupon2, coupon3
+    from user_item
+  </select>
+  <update id="updateCoupon1" parameterType="java.lang.String">
+    update user_item
+    set coupon1=coupon1-1
+    where userId=#{userid}
+  </update>
+  <update id="updateCoupon2" parameterType="java.lang.String">
+    update user_item
+    set coupon2=coupon2-1
+    where userId=#{userid}
+  </update>
+  <update id="updateCoupon3" parameterType="java.lang.String">
+    update user_item
+    set coupon3=coupon3-1
+    where userId=#{userid}
+  </update>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anthotel.admin.dao.CheckInMapper">
+  <resultMap id="BaseResultMap" type="com.anthotel.admin.entity.CheckIn">
+    <constructor>
+      <idArg column="userId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phoneNumber" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="checkInTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="updateTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from check_in
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.anthotel.admin.entity.CheckIn">
+    insert into check_in (userId, `name`, roomId, 
+      phoneNumber, checkInTime, updateTime
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{roomid,jdbcType=VARCHAR}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{checkintime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anthotel.admin.entity.CheckIn">
+    update check_in
+    set `name` = #{name,jdbcType=VARCHAR},
+      roomId = #{roomid,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      checkInTime = #{checkintime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select userId, `name`, roomId, phoneNumber, checkInTime, updateTime
+    from check_in
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select userId, `name`, roomId, phoneNumber, checkInTime, updateTime
+    from check_in
+  </select>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anthotel.admin.dao.ReserveRecordMapper">
+  <resultMap id="BaseResultMap" type="com.anthotel.admin.entity.ReserveRecord">
+    <constructor>
+      <idArg column="orderId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hotelId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="openId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="uname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phoneNumber" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomType" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserveTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="preFee" javaType="java.lang.Float" jdbcType="REAL" />
+      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="startTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="endTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from reserve_record
+    where orderId = #{orderid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.anthotel.admin.entity.ReserveRecord">
+    insert into reserve_record (orderId, hotelId, openId, 
+      uname, phoneNumber, roomType, 
+      reserveTime, preFee, `status`, 
+      startTime, endTime)
+    values (#{orderid,jdbcType=VARCHAR}, #{hotelid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{uname,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, #{roomtype,jdbcType=VARCHAR}, 
+      #{reservetime,jdbcType=TIMESTAMP}, #{prefee,jdbcType=REAL}, #{status,jdbcType=TINYINT}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anthotel.admin.entity.ReserveRecord">
+    update reserve_record
+    set hotelId = #{hotelid,jdbcType=VARCHAR},
+      openId = #{openid,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      roomType = #{roomtype,jdbcType=VARCHAR},
+      reserveTime = #{reservetime,jdbcType=TIMESTAMP},
+      preFee = #{prefee,jdbcType=REAL},
+      `status` = #{status,jdbcType=TINYINT},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP}
+    where orderId = #{orderid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select orderId, hotelId, openId, uname, phoneNumber, roomType, reserveTime, preFee, 
+    `status`, startTime, endTime
+    from reserve_record
+    where orderId = #{orderid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select orderId, hotelId, openId, uname, phoneNumber, roomType, reserveTime, preFee, 
+    `status`, startTime, endTime
+    from reserve_record
+  </select>
+</mapper>

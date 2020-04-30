@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anthotel.admin.dao.RoomInfoMapper">
+  <resultMap id="BaseResultMap" type="com.anthotel.admin.entity.RoomInfo">
+    <constructor>
+      <idArg column="roomId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomStatus" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from room_info
+    where roomId = #{roomid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.anthotel.admin.entity.RoomInfo">
+    insert into room_info (roomId, roomStatus)
+    values (#{roomid,jdbcType=VARCHAR}, #{roomstatus,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anthotel.admin.entity.RoomInfo">
+    update room_info
+    set roomStatus = #{roomstatus,jdbcType=VARCHAR}
+    where roomId = #{roomid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select roomId, roomStatus
+    from room_info
+    where roomId = #{roomid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select roomId, roomStatus
+    from room_info
+  </select>
+  <select id="selectFree" resultMap="BaseResultMap">
+    select roomId, roomStatus
+    from room_info
+    where roomStatus='1'
+  </select>
+  <update id="updateFree" parameterType="java.lang.String">
+    update room_info
+    set roomStatus='0'
+    where roomId=#{roomid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateFull" parameterType="java.lang.String">
+    update room_info
+    set roomStatus='1'
+    where roomId=#{roomid,jdbcType=VARCHAR}
+  </update>
+<!--  <update id="updateReserve" parameterType="java.lang.String">-->
+<!--    update room_info-->
+<!--    set roomStatus='-1'-->
+<!--    where roomId=#{roomid,jdbcType=VARCHAR}-->
+<!--  </update>-->
+</mapper>

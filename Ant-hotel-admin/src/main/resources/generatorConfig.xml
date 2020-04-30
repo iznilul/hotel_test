@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--mybatis的代码生成器相关配置-->
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="application.properties"/>
+
+    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="autoDelimitKeywords" value="true" />
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+        <property name="javaFileEncoding" value="utf-8" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <!-- 注释 -->
+        <commentGenerator >
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!--数据库链接-->
+        <jdbcConnection driverClass="${spring.datasource.driverClassName}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="com.anthotel.admin.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="constructorBased" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" >
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.anthotel.admin.dao" targetProject="src/main/java" type="XMLMAPPER" >
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!-- 数据库表的信息 -->
+<!--        已经注释了的是因为对应的mapper有额外接口，不宜覆盖，不要乱用哦~ o(*￣▽￣*)o-->
+<!--        <table tableName="canteen_record" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="coupons" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="couponId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="fitness_record" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="fitness_type" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="menu" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="foodId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="off_record" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="on_record" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="check_in" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="hotel_list" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--            &lt;!&ndash;            <generatedKey column="roomId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="hotel_room_info" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="roomId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="reserve_record" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="reserveId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="room_live_record" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--                <table tableName="room_info" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--        &lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--                </table>-->
+<!--        <table tableName="check_out" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+        <table tableName="user_face_info" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">
+<!--            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />-->
+        </table>
+<!--        <table tableName="user_item" enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <generatedKey column="userId" sqlStatement="Mysql" identity="true" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table tableName="admin">-->
+
+<!--        </table>-->
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anthotel.admin.dao.OnRecordMapper">
+  <resultMap id="BaseResultMap" type="com.anthotel.admin.entity.OnRecord">
+    <constructor>
+      <arg column="userId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="roomId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="onTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.anthotel.admin.entity.OnRecord">
+    insert into on_record (userId, `name`, roomId, 
+      onTime)
+    values (#{userid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{roomid,jdbcType=VARCHAR}, 
+      #{ontime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select userId, `name`, roomId, onTime
+    from on_record
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.anthotel.admin.entity.OnRecord">
+    update on_record
+    set `name` = #{name,jdbcType=VARCHAR},
+      onTime = #{ontime},
+      roomId = #{roomid,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select userId, `name`, onTime, roomId
+    from on_record
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from on_record
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+</mapper>

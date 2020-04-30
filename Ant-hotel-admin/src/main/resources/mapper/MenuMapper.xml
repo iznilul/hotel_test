@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anthotel.admin.dao.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.anthotel.admin.entity.Menu">
+    <constructor>
+      <idArg column="foodId" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="foodName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="price" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from menu
+    where foodId = #{foodid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.anthotel.admin.entity.Menu">
+    insert into menu (foodId, foodName, price
+      )
+    values (#{foodid,jdbcType=VARCHAR}, #{foodname,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anthotel.admin.entity.Menu">
+    update menu
+    set foodName = #{foodname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER}
+    where foodId = #{foodid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select foodId, foodName, price
+    from menu
+    where foodId = #{foodid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select foodId, foodName, price
+    from menu
+  </select>
+</mapper>
